@@ -3,15 +3,12 @@
   "version": "1.0.0",
   "description": "Etherscan Verified Contracts",
   "main": "getContracts.js",
-  "dependencies": {
-    "html-entities": "^1.2.1",
-    "sleep": "^5.2.3",
-    "request": "^2.81.0",
-    "sync-request": "^6.0.0"
+  "devDependencies": {
+    "@playwright/test": "^1.27.0"
   },
-  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon"
   },
   "repository": {
     "type": "git",
@@ -22,5 +19,10 @@
   "bugs": {
     "url": "https://github.com/thec00n/etherscan_verified_contracts/issues"
   },
-  "homepage": "https://github.com/thec00n/etherscan_verified_contracts#readme"
+  "homepage": "https://github.com/thec00n/etherscan_verified_contracts#readme",
+  "dependencies": {
+    "dayjs": "^1.11.5",
+    "nodemon": "^2.0.20",
+    "playwright": "^1.27.0"
+  }
 }
