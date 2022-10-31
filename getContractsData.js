@@ -1,8 +1,8 @@
 const fs = require("fs");
 const playwright = require("playwright");
 const dayjs = require("dayjs");
-const readDataFromJSONFile = require('./readDataFromJSONFile')
-const writeDataToJSONFile = require('./writeDataToJSONFile')
+const readDataFromJSONFile = require("./readDataFromJSONFile");
+const writeDataToJSONFile = require("./writeDataToJSONFile");
 
 const main = () => {
   fs.readdir("./contracts", async (err, filenames) => {
@@ -10,13 +10,13 @@ const main = () => {
       console.error(err);
       return;
     }
-    const database = readDataFromJSONFile('./database.json')
-    const {lastSavedIndex, contractsData} = database
+    const database = readDataFromJSONFile("./database2.json");
+    const { lastSavedIndex, contractsData } = database;
     const TOTAL_DATASET = filenames.length;
     const SELECTED_DATASET = 10;
     const filenamesSorted = filenames.sort();
-    if(lastSavedIndex >= TOTAL_DATASET) {
-      return
+    if (lastSavedIndex >= TOTAL_DATASET) {
+      return;
     }
     //get contracts detail
     for (filename of filenamesSorted.slice(lastSavedIndex + 1, TOTAL_DATASET)) {
@@ -45,28 +45,26 @@ const main = () => {
           txLatestDate: transactionDate,
           filename,
         };
-        database.lastSavedIndex += 1
-        writeDataToJSONFile(database, './database.json')
+        database.lastSavedIndex += 1;
+        writeDataToJSONFile(database, "./database2.json");
       } catch (err) {
         console.log(err);
       } finally {
         await browser.close();
       }
     }
-    const objectAddressSortByTxCountArr = Object.entries(
-      contractsData
-    ).sort(([_, { txCount: txCountA }], [__, { txCount: txCountB }]) => {
-      if (txCountA > txCountB) {
-        return -1;
-      } else if (txCountA < txCountB) {
-        return 1;
-      } else {
-        return 0;
+    const objectAddressSortByTxCountArr = Object.entries(contractsData).sort(
+      ([_, { txCount: txCountA }], [__, { txCount: txCountB }]) => {
+        if (txCountA > txCountB) {
+          return -1;
+        } else if (txCountA < txCountB) {
+          return 1;
+        } else {
+          return 0;
+        }
       }
-    });
-    const objectAddressSortByDateCountArr = Object.entries(
-      contractsData
-    ).sort(
+    );
+    const objectAddressSortByDateCountArr = Object.entries(contractsData).sort(
       (
         [_, { txLatestDate: txLatestDateA }],
         [__, { txLatestDate: txLatestDateB }]
