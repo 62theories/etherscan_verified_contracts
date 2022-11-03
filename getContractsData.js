@@ -10,7 +10,8 @@ const main = () => {
       console.error(err);
       return;
     }
-    const database = readDataFromJSONFile("./database2.json");
+    const databasePath = "./database3.json";
+    const database = readDataFromJSONFile(databasePath);
     const { lastSavedIndex, contractsData } = database;
     const TOTAL_DATASET = filenames.length;
     const SELECTED_DATASET = 10;
@@ -46,7 +47,7 @@ const main = () => {
           filename,
         };
         database.lastSavedIndex += 1;
-        writeDataToJSONFile(database, "./database2.json");
+        writeDataToJSONFile(database, databasePath);
       } catch (err) {
         console.log(err);
       } finally {
